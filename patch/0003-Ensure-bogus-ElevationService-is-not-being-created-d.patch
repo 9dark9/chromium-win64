@@ -1,4 +1,4 @@
-From 4eaa97c11a7a7c61aaacd74019db6a71989771bf Mon Sep 17 00:00:00 2001
+From 3a499acbb7a928912b5c6c8a6cb901c90b037760 Mon Sep 17 00:00:00 2001
 From: Hibiki Tachibana <57486057+Hibbiki@users.noreply.github.com>
 Date: Sat, 22 Jul 2023 01:33:35 +0200
 Subject: [PATCH 3/4] Ensure bogus ElevationService is not being created during
@@ -6,11 +6,11 @@ Subject: [PATCH 3/4] Ensure bogus ElevationService is not being created during
 
 Signed-off-by: Hibiki Tachibana <57486057+Hibbiki@users.noreply.github.com>
 ---
- chrome/installer/setup/install_worker.cc | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ chrome/installer/setup/install_worker.cc | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/chrome/installer/setup/install_worker.cc b/chrome/installer/setup/install_worker.cc
-index 532f440892e1e..a0b348b75e27d 100644
+index 34405af1acb41..d110e5bd49a31 100644
 --- a/chrome/installer/setup/install_worker.cc
 +++ b/chrome/installer/setup/install_worker.cc
 @@ -113,6 +113,8 @@ void AddInstallerCopyTasks(const InstallParams& install_params,
@@ -60,16 +60,7 @@ index 532f440892e1e..a0b348b75e27d 100644
  
  #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
  // Adds work items to add the "store-dmtoken" command to Chrome's version key.
-@@ -1070,7 +1078,7 @@ void AddInstallWorkItems(const InstallParams& install_params,
-                                     install_list);
-   AddPlatformExperienceHelperWorkItems(installer_state, new_version,
-                                        install_list);
--#endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING
-+#endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
-   AddFirewallRulesWorkItems(installer_state, !current_version.IsValid(),
-                             install_list);
- 
-@@ -1350,8 +1358,10 @@ void AddFinalizeUpdateWorkItems(const InstallationState& original_state,
+@@ -1381,8 +1389,10 @@ void AddFinalizeUpdateWorkItems(const InstallationState& original_state,
                             GetWerHelperPath(target_path, new_version), list);
  
    if (installer_state.system_install()) {
